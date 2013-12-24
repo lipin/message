@@ -1,0 +1,22 @@
+!!!
+%html{ lang: :en }
+  %head
+    %meta{ charset: 'utf-8' }
+    %title Demo
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+    %meta{ content: '', name: 'description' }
+    %meta{ content: '', name: 'author' }
+
+    = stylesheet_link_tag :application, media: :all
+    = javascript_include_tag :application
+    
+    = yield :head
+    = csrf_meta_tags
+
+  %body
+    = render 'header'
+
+    .container.bs-docs-container
+      = yield
+
+    = yield :js

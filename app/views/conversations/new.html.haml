@@ -1,0 +1,11 @@
+.row.padding
+  .col-md-12
+
+    %p 发送给 #{@target_user.email}
+
+    = simple_form_for resource, url: collection_path, html: { class: 'form-horizontal' } do |f|
+      = f.input :body
+      = f.input :target_user_id, as: :hidden, input_html: { value: @target_user.id }
+
+      .form-actions
+        = f.button :submit, '发送', class: 'btn btn-success'

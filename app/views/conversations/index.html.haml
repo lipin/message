@@ -1,0 +1,58 @@
+.row.padding
+
+
+  / Nav tabs
+  %ul.nav.nav-tabs
+    %li
+      %a{"data-toggle" => "tab", href: "#inbox"} 收件箱
+    %li
+      %a{"data-toggle" => "tab", href: "#sent_box"} 发件箱
+
+  .tab-content
+    #inbox.tab-pane.active
+
+      %table.table.table-striped
+        %tbody
+          - @conversatons.each do |resource|
+            %tr
+              %td
+                %span.glyphicon.glyphicon-envelope
+              %td
+                %img{ data: { src: 'holder.js/32x32' } }
+                = resource.user.email
+              %td= resource.body
+              %td
+                = time_ago_in_words resource.created_at
+                前
+              %td
+                - label = resource.is_read? ? '已读' : '未读'
+                %span.label.label-success= label
+
+              %td
+                = link_to '回复', resource_path(resource), class: 'btn btn-primary'
+                - unless resource.is_archived?
+                  = link_to '归档', '#', class: 'btn btn-warning'
+
+    #sent_box.tab-pane
+
+      %table.table.table-striped
+        %tbody
+          - @sent_box_conversations.each do |resource|
+            %tr
+              %td
+                %span.glyphicon.glyphicon-envelope
+              %td
+                %img{ data: { src: 'holder.js/32x32' } }
+                = resource.user.email
+              %td= resource.body
+              %td
+                = time_ago_in_words resource.created_at
+                前
+              %td
+                - label = resource.is_read? ? '已读' : '未读'
+                %span.label.label-success= label
+
+              %td
+                = link_to '回复', resource_path(resource), class: 'btn btn-primary'
+                - unless resource.is_archived?
+                  = link_to '归档', '#', class: 'btn btn-warning'

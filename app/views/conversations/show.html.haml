@@ -1,0 +1,30 @@
+.row.padding
+  .media
+    %a.pull-left{href: "#"}
+      %img.media-object{ data: { src: 'holder.js/64x64' } }
+    .media-body
+      %h4.media-heading= resource.user.email
+      %p= resource.body
+      %p
+        = time_ago_in_words resource.created_at
+        前
+
+  - resource.messages.each do |message|
+    .media
+      %a.pull-left{href: "#"}
+        %img.media-object{ data: { src: 'holder.js/64x64' } }
+      .media-body
+        %h4.media-heading= message.user.email
+        %p= message.body
+        %p
+          = time_ago_in_words message.created_at
+          前
+
+
+  .col-md-12
+    = simple_form_for resource.messages.new, url: conversation_messages_path(resource), html: { class: 'form-horizontal' } do |f|
+
+      = f.input :body
+
+      .form-actions
+        = f.button :submit, '发送', class: 'btn btn-success'

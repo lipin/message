@@ -1,0 +1,18 @@
+common: &common
+  adapter: postgresql
+  encoding: utf8
+  username: postgres
+  password:
+  host: localhost
+
+development:
+  <<: *common
+  database: demo_development
+
+test: &test
+  <<: *common
+  database: demo_test
+
+production:
+  <<: *common
+  database: demo_development

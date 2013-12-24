@@ -1,0 +1,9 @@
+.row.padding
+  - User.all.each do |u|
+    .col-sm-6.col-md-4
+      .thumbnail
+        %img{alt: "...", "data-src" => "holder.js/300x200"}/
+        .caption
+          %h3= u.email
+          %p
+            = link_to '站内信', new_conversation_path(user_id: u.id), class: 'btn btn-primary'
